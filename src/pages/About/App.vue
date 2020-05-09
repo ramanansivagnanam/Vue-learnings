@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <h1 v-if="show">Showing this content</h1>
-    <br>
-    <br>
+    <br />
+    <br />
     <button @click="toggleShow">Toggle above content</button>
     <EmployeeInfo :createEmployee="createEmployee" />
     <Employess :emplist="employess" :deleteEmp="deleteEmployee" />
@@ -10,9 +10,10 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, getCurrentInstance } from "vue";
 import EmployeeInfo from "../../components/EmployeeForm";
 import Employess from "../../components/Employess";
+import { useToggle } from "../../scripts/useToggle";
 export default {
   name: "App",
   components: {
@@ -22,7 +23,9 @@ export default {
 
   setup() {
     const employess = ref([]);
-    const show = ref(true);
+    console.log(show);
+    const _contextins = getCurrentInstance();
+    console.log(_contextins);
     const createEmployee = (name, location) => {
       const newEmp = {
         id: Math.random(),
@@ -34,14 +37,13 @@ export default {
     const deleteEmployee = empid => {
       employess.value = employess.value.filter(emp => emp.id !== empid);
     };
-    const toggleShow = () =>{
-      return show.value = !show.value;
-    }
-    return { employess, show, createEmployee, deleteEmployee , toggleShow};
+
+    const { show , makeToggle: toggleShow } = useToggle();
+    
+    return { employess, show, createEmployee, deleteEmployee, toggleShow };
   }
 
-
-//  *** old option API implementation
+  //  *** old option API implementation
 
   // data(){
   //   return{
@@ -65,7 +67,6 @@ export default {
   //     this.employess = this.employess.filter(emp => emp.id !== empid)
   //   },
   // }
-
 };
 </script>
 

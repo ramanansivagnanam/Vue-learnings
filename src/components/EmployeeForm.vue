@@ -10,7 +10,7 @@
       <input type="text" placeholder="location" v-model="empInfo.empLoc" />
       <br />
       <br />
-      <button type="submit">Submit</button>
+      <button type="submit" >Submit</button>
     </form>
   </div>
 </template>

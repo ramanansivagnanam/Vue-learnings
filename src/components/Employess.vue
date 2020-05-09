@@ -4,7 +4,7 @@
     <div v-for="emp in emplist" :key="emp.id" @click="handleDelete(emp.id)" class="emplyee-det">
       <h4>{{ emp.name }}</h4>
       <h4>{{ emp.location }}</h4>
-    </div>
+    </div> 
   </div>
 </template>
 
@@ -21,10 +21,11 @@ export default {
       required: true
     }
   },
-  setup(props){
+  setup(props,context){
      const handleDelete = proid => {
         props.deleteEmp(proid);
     }
+    console.log(context);
     return { handleDelete };
   },
 
